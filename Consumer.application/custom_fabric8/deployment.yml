@@ -20,8 +20,6 @@ spec:
           requests:
             cpu: 200m
         env:
-        - name: BW_APP_MONITORING_CONFIG
-          value: '{"url":"http://bwce-mon-svc:8080"}'
         - name: PROVIDER_PORT
           value: '8000'
         - name: APP_CONFIG_PROFILE
