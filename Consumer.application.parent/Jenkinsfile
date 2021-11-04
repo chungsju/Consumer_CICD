@@ -12,21 +12,21 @@ pipeline {
         }
         stage('Clean & Package') {
             steps {
-                dir("Provider.application.parent") {
+                dir("Consumer.application.parent") {
                		 sh "mvn clean package"
                	}
             }
         }
         stage('Docker Image Build') {
             steps {
-            	 dir("Provider.application.parent") {
+            	 dir("Consumer.application.parent") {
                		 sh "mvn package initialize docker:build"
                	}
             }
         }
         stage('Docker Image push') {
             steps {
-                 dir("Provider.application.parent") {
+                 dir("Consumer.application.parent") {
                		// setting.xml 환경설정파일 참조 
                  	sh "mvn initialize docker:push -s setting.xml"
                	}
@@ -34,7 +34,7 @@ pipeline {
         }
         stage('Kubernetes Resource') {
             steps {
-                 dir("Provider.application.parent") { 
+                 dir("Consumer.application.parent") { 
                  	sh "mvn initialize com.tibco.plugins:bw6-maven-plugin:bwfabric8json fabric8:resource"
                	} 
             }
@@ -48,7 +48,7 @@ pipeline {
                  	   sh "rm -rf /var/jenkins_home/workspace/kube_deploy/"
                  	   sh "mkdir /var/jenkins_home/workspace/kube_deploy/"
                  	   sh "git clone https://github.com/chungsju/kube_deploy.git /var/jenkins_home/workspace/kube_deploy/"
-                 	   sh "cp -r Provider.application/target/classes/META-INF/fabric8/kubernetes /var/jenkins_home/workspace/kube_deploy/yaml/consumer-yaml"
+                 	   sh "cp -r Consumer.application/target/classes/META-INF/fabric8/kubernetes /var/jenkins_home/workspace/kube_deploy/yaml/consumer-yaml"
                  	   
                  	   
                  	   dir("/var/jenkins_home/workspace/kube_deploy/") {
