@@ -48,7 +48,8 @@ pipeline {
                  	   sh "rm -rf /var/jenkins_home/workspace/kube_deploy/"
                  	   sh "mkdir /var/jenkins_home/workspace/kube_deploy/"
                  	   sh "git clone https://github.com/chungsju/kube_deploy.git /var/jenkins_home/workspace/kube_deploy/"
-                 	   sh "cp -r Consumer.application/target/classes/META-INF/fabric8/kubernetes /var/jenkins_home/workspace/kube_deploy/yaml/consumer-yaml"
+                 	   sh "cp -r Provider.application/target/classes/META-INF/fabric8/kubernetes/consumer-deployment.yml /var/jenkins_home/workspace/kube_deploy/yaml/provider-yaml/"
+                 	   sh "cp -r Provider.application/target/classes/META-INF/fabric8/kubernetes/consumer-svc-service.yml /var/jenkins_home/workspace/kube_deploy/yaml/provider-yaml/"
                  	   
                  	   
                  	   dir("/var/jenkins_home/workspace/kube_deploy/") {
