@@ -5,7 +5,7 @@
     "title" : "consumer",
     "description" : "consumer service"
   },
-  "host" : "",
+  "host" : "0.0.0.0:8080",
   "basePath" : "/",
   "schemes" : [ "http" ],
   "paths" : {
